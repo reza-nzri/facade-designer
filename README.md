@@ -1,6 +1,6 @@
-# Modulyte Facade Designer
+# Facade Designer
 
-Interactive facade configurator for **modulyte GmbH**. Homeowners open a building project supplied as JSON, style each facade with the available materials and colours (for a whole wall or for any group of modules), see the price update live, compare design variants in 2D and 3D, and hand the final design back to Modulyte as a printable summary and a versioned JSON export.
+Interactive facade configurator for **a company**. Homeowners open a building project supplied as JSON, style each facade with the available materials and colours (for a whole wall or for any group of modules), see the price update live, compare design variants in 2D and 3D, and hand the final design back to the company as a printable summary and a versioned JSON export.
 
 > Customer-facing UI language: **German** (MVP). Code, docs, identifiers and commits: **English**.
 
@@ -35,7 +35,7 @@ Example print output: [`docs/screenshots/customer-summary-example.pdf`](docs/scr
 ---
 
 - Undo/redo (Ctrl+Z / Ctrl+Shift+Z), autosave of project + design in the browser, onboarding guide and glossary in plain German, keyboard shortcuts, versioned JSON export with full audit data, import validation with understandable German errors, window-wide file drop, "copy diagnostics" for support.
-  
+
 </details>
 
 ---
@@ -70,16 +70,16 @@ The app opens the supplied example house (`static/projects/fassadendesigner_hous
 <details>
   <summary><h2>Technology stack</h2></summary>
 
-| Concern       | Choice                                                       | Why                                                                                   |
-| ------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
-| App framework | **SvelteKit 2** (static adapter, SPA), **Svelte 5** runes    | Preferred by Modulyte (job ad + assignment), small runtime, fine-grained reactivity   |
-| Language      | **TypeScript (strict)** incl. `noUncheckedIndexedAccess`     | Catch data errors at compile time                                                     |
-| 2D rendering  | **SVG** in millimetre user units                             | Exact geometry, crisp at every zoom, accessible, printable                            |
-| 3D rendering  | **three.js**                                                 | Bonus requirement; geometry built from the same domain data                           |
-| Validation    | **Zod 4**                                                    | Runtime validation of untrusted JSON + inferred TypeScript types + JSON Schema export |
-| Tests         | **Vitest** (unit/integration), **Playwright** (E2E)          | Fast domain tests, real-browser workflows                                             |
-| Quality       | ESLint (typescript-eslint, eslint-plugin-svelte), Prettier   | Consistent code, Svelte-specific best practices                                       |
-| Styling       | Plain CSS with design tokens (`src/app.css`) + scoped styles | No extra dependency; tokens make a later design system easy                           |
+| Concern       | Choice                                                       | Why                                                                                    |
+| ------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------- |
+| App framework | **SvelteKit 2** (static adapter, SPA), **Svelte 5** runes    | Preferred by the company (job ad + assignment), small runtime, fine-grained reactivity |
+| Language      | **TypeScript (strict)** incl. `noUncheckedIndexedAccess`     | Catch data errors at compile time                                                      |
+| 2D rendering  | **SVG** in millimetre user units                             | Exact geometry, crisp at every zoom, accessible, printable                             |
+| 3D rendering  | **three.js**                                                 | Bonus requirement; geometry built from the same domain data                            |
+| Validation    | **Zod 4**                                                    | Runtime validation of untrusted JSON + inferred TypeScript types + JSON Schema export  |
+| Tests         | **Vitest** (unit/integration), **Playwright** (E2E)          | Fast domain tests, real-browser workflows                                              |
+| Quality       | ESLint (typescript-eslint, eslint-plugin-svelte), Prettier   | Consistent code, Svelte-specific best practices                                        |
+| Styling       | Plain CSS with design tokens (`src/app.css`) + scoped styles | No extra dependency; tokens make a later design system easy                            |
 
 SvelteKit 2.70 was chosen over the brand-new SvelteKit 3 (released two weeks before this work) to avoid early-adopter risk. Python/FastAPI, PostgreSQL, C#/.NET or Unity (also mentioned in the job ad) are **not** used: the MVP has no server-side requirement. See _How to extend_.
 </details>
@@ -132,13 +132,12 @@ More: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 <details>
   <summary><h2>Data contracts (JSON import/export)</h2></summary>
 
-- **Input** – the original Modulyte project format (`project`, `walls[]`, `surfaces[]`), accepted unchanged. Unknown extra fields are preserved. Schema: [`docs/schemas/source-project.v1.schema.json`](docs/schemas/source-project.v1.schema.json).
-- **Export** – `format: "modulyte.facade-design"`, `formatVersion: 1`, containing the **unchanged source project**, the **design** (`wallFinishes`, `moduleOverrides`) and a derived **summary** for Modulyte (per-wall areas and prices, material lines, every module's assignment, assumptions). Schema: [`docs/schemas/facade-design.v1.schema.json`](docs/schemas/facade-design.v1.schema.json).
+- **Input** – the company's original project format (`project`, `walls[]`, `surfaces[]`), accepted unchanged. Unknown extra fields are preserved. Schema: [`docs/schemas/source-project.v1.schema.json`](docs/schemas/source-project.v1.schema.json).
+- **Export** – `format: "facade-designer.facade-design"`, `formatVersion: 1`, containing the **unchanged source project**, the **design** (`wallFinishes`, `moduleOverrides`) and a derived **summary** for the company (per-wall areas and prices, material lines, every module's assignment, assumptions). Schema: [`docs/schemas/facade-design.v1.schema.json`](docs/schemas/facade-design.v1.schema.json).
 - **Import** accepts both. For design documents only `source` + `design` are trusted; prices are recomputed and a warning is shown if a stored total differs. Invalid references (unknown modules, colours not offered) are dropped with a notice.
 
 Details and examples: [docs/DATA_CONTRACT.md](docs/DATA_CONTRACT.md).
 </details>
-
 
 <details>
   <summary><h2>Pricing methodology</h2></summary>
@@ -159,12 +158,11 @@ Reference numbers (also used as golden tests): clinker everywhere **15,988.50 �
 <details>
   <summary><h2>Geometry and coordinate system</h2></summary>
 
-
-
 - Units: **millimetres** (integers in the data). Origin: **bottom-left corner of each wall**, x to the right, y upwards – as seen from outside.
 - SVG has its origin top-left with y downwards; the flip `y_svg = H − (y + h)` happens **only** in `WallElevation.svelte`. Pointer coordinates are converted back with `getScreenCTM().inverse()`.
 - 3D: walls with the ids `south/east/north/west` form a rectangular footprint (9.80 × 8.50 m for the example); each wall's x axis runs left→right as seen from outside. A unit test verifies that the four walls close the footprint. Projects with other ids are shown as a row of walls.
-- Module depth in 3D: 210 mm (≈ 21 cm system thickness published by Modulyte) – visual only.
+- Module depth in 3D: 210 mm (≈ 21 cm system thickness published by the company) – visual only.
+
 </details>
 
 <details>
@@ -175,6 +173,7 @@ Reference numbers (also used as golden tests): clinker everywhere **15,988.50 �
 - Material names from the data are presented in German (`Clinker bricks` → _Klinkerriemchen_, `Rockpanel` → _Rockpanel-Platten_, `Rhombus battens` → _Rhombusleisten (Holz)_), colour ids get German labels and display colours. Unknown materials/colours from other projects fall back to the data name and a deterministic colour, and the texture is guessed from the name.
 - Applying a material to a whole wall **keeps** individually styled regions (e.g. a clinker plinth survives a colour change of the wall). "Bereiche zurücksetzen" removes them.
 - Technical overlays (module borders, Passstück marks, dimensions, module numbers) can be toggled for a cleaner "photo" view.
+
 </details>
 
 <details>
@@ -182,18 +181,20 @@ Reference numbers (also used as golden tests): clinker everywhere **15,988.50 �
 
 - **Unit/integration (Vitest)**: schema + semantic validation, exact areas, overlap handling, pricing golden numbers and invariants (lines = walls = total), design operations, selection presets, import/export round trip, tampered price detection, repositories, viewport math, 3D footprint closure, variant comparison, JSON-schema drift. ≈ 92 % statement coverage of the domain/io/persistence layers.
 - **End-to-end (Playwright, Chromium)**: loading, wall styling with exact prices, plinth region, click/shift/frame selection + inspector, undo/redo, wall switching, autosave after reload, export → re-import round trip, invalid file error, original project import, 3D click-to-select, variants save/compare/load, print layout.
+
 </details>
 
 <details>
   <summary><h2>Assumptions and known limitations</h2></summary>
 
 - The supplied JSON is the source of truth. The shortened example inside the assignment text differs from the file (e.g. 9400 × 5600 wall, 1250 × 625 modules); the app reads all sizes from the data and never hard-codes them.
-- Prices are **assignment data**, not real Modulyte prices; VAT status is unknown and therefore not shown as "inkl./zzgl.".
-- Geometry is never edited: modules are fixed by Modulyte's layout plan (computing a new plan is Test Project 2). Users style modules; they cannot move or resize them.
+- Prices are **assignment data**, not the company's real prices; VAT status is unknown and therefore not shown as "inkl./zzgl.".
+- Geometry is never edited: modules are fixed by the company's layout plan (computing a new plan is Test Project 2). Users style modules; they cannot move or resize them.
 - Display colours/textures for material ids are UI assumptions (`src/lib/features/appearance/appearance.ts`).
 - The 3D roof is a neutral placeholder (no roof data); window frames/reveals are simplified.
 - Variants and autosave live in the browser (`localStorage`); clearing browser data deletes them – export files are the durable hand-over format. If storage is blocked, the app says so.
 - Desktop-first layout; on tablets/phones the panels stack vertically and core functions remain usable, but precise selection is best with a mouse.
+
 </details>
 
 <details>
@@ -204,19 +205,20 @@ Reference numbers (also used as golden tests): clinker everywhere **15,988.50 �
 - **New region preset**: add an id + German label to `SELECTION_PRESETS` and a case in `selectPreset` (`src/lib/domain/selection.ts`).
 - **Backend persistence**: implement `VariantRepository`/`WorkspaceRepository` against an API and pass them to `EditorStore` in `src/routes/+page.svelte`.
 - **Verlegeplaner (Test Project 2)**: implement `layout(wall, moduleSystem, params) → modules[]` in `src/lib/domain/layout/` (pure, tested), then feed its output into the existing `walls[].modules` – the whole designer, pricing, 3D and export work unchanged. See [docs/VERLEGEPLANER_INTEGRATION.md](docs/VERLEGEPLANER_INTEGRATION.md).
+
 </details>
 
 <details>
   <summary><h3>With more time</h3></summary>
 
 - Real material photos/PBR textures and a material catalogue from an API; colour codes (RAL/NCS) in the data.
-- Full cost model (modules, substructure, reveals, labour, VAT) once Modulyte provides rates; quote request flow.
+- Full cost model (modules, substructure, reveals, labour, VAT) once the company provides rates; quote request flow.
 - Accounts + server persistence (FastAPI + PostgreSQL), shareable design links, PDF generation on the server.
 - Gable walls/polygons, reveals and plinth geometry from the scan model; photo overlay of the real house.
 - Visual regression tests, accessibility audit with screen-reader users, i18n (English UI).
+
 </details>
 
 ---
 
-Assessment data ([`static/projects/fassadendesigner_house.json`](https://github.com/reza-nzri/modulyte-facade-designer/blob/main/static/projects/fassadendesigner_house.json)) © [Modulyte GmbH](https://www.modulyte.de/), used for this assignment only.
-
+Assessment data ([`static/projects/fassadendesigner_house.json`](https://github.com/reza-nzri/facade-designer/blob/main/static/projects/fassadendesigner_house.json)) © a company, used for this assignment only.

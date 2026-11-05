@@ -69,14 +69,14 @@ describe('export/import round trip', () => {
 		);
 	});
 
-	it('contains the data Modulyte needs to understand the design', () => {
+	it('contains the data the company needs to understand the design', () => {
 		const project = createTinyProject();
 		const design = applyModuleFinish(createDefaultDesign(project), 'front', ['D'], {
 			surfaceId: 'brick',
 			color: 'red'
 		});
 		const document = buildDesignDocument(project, design);
-		expect(document.format).toBe('modulyte.facade-design');
+		expect(document.format).toBe('facade-designer.facade-design');
 		expect(document.formatVersion).toBe(1);
 		expect(document.projectKey).toBe(computeProjectKey(project));
 		expect(document.summary.moduleAssignments).toHaveLength(4);

@@ -1,7 +1,7 @@
 /** Drag & drop payload for "drag a material swatch onto the facade". */
 import type { Finish } from '$lib/domain';
 
-export const FINISH_MIME = 'application/x-modulyte-finish';
+export const FINISH_MIME = 'application/x-facade-designer-finish';
 
 export function writeDraggedFinish(dataTransfer: DataTransfer | null, finish: Finish) {
 	if (!dataTransfer) return;

@@ -38,7 +38,7 @@
 		})
 	);
 
-	const ONBOARDING_KEY = 'modulyte.facade-designer.v1.onboarded';
+	const ONBOARDING_KEY = 'facade-designer.v1.onboarded';
 
 	let fileInput = $state<HTMLInputElement>();
 	let loading = $state(true);
@@ -200,7 +200,7 @@
 		<div class="welcome card">
 			<Icon name="house" size={32} />
 			<h1>Willkommen beim Fassadendesigner</h1>
-			<p>Öffnen Sie Ihre Projektdatei von modulyte oder starten Sie mit dem Beispielhaus.</p>
+			<p>Öffnen Sie Ihre Projektdatei vom Unternehmen oder starten Sie mit dem Beispielhaus.</p>
 			<div class="row">
 				<button class="btn btn-primary" onclick={() => fileInput?.click()}
 					><Icon name="upload" /> Datei öffnen</button

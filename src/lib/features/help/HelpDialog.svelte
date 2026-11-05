@@ -49,7 +49,7 @@
 		],
 		[
 			'Verlegeplan',
-			'Plan, der zeigt, wo welches Modul sitzt. Er wird von modulyte aus dem 3D-Scan Ihres Hauses erstellt und ist hier bereits enthalten.'
+			'Plan, der zeigt, wo welches Modul sitzt. Er wird vom Unternehmen aus dem 3D-Scan Ihres Hauses erstellt und ist hier bereits enthalten.'
 		],
 		['Stückliste', 'Liste aller Module mit Maßen – die Grundlage für die Fertigung.']
 	] as const;
@@ -69,7 +69,7 @@
 	async function copyDiagnostics() {
 		const report = JSON.stringify(
 			{
-				app: 'modulyte-facade-designer',
+				app: 'facade-designer',
 				version: APP_VERSION,
 				userAgent: navigator.userAgent,
 				log: getLogEntries()
@@ -130,7 +130,7 @@
 	<p class="note">
 		<Icon name="info" size={14} /> Preise sind unverbindliche Schätzungen für die Fassadenoberfläche auf
 		Basis der Projektdaten. Ihr Entwurf wird automatisch in diesem Browser gespeichert; mit „Exportieren“
-		erhalten Sie eine Datei für modulyte.
+		erhalten Sie eine Datei für das Unternehmen.
 	</p>
 
 	{#snippet footer()}

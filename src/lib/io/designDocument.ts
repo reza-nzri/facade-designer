@@ -1,5 +1,5 @@
 /**
- * Versioned export contract "modulyte.facade-design" v1.
+ * Versioned export contract "facade-designer.facade-design" v1.
  *
  * The export embeds the unchanged source project, the customer's design (the only editable
  * state) and a derived, human/machine readable summary (per-wall prices, module assignments).
@@ -20,9 +20,9 @@ import {
 } from '$lib/domain';
 import { computeProjectKey } from './projectKey';
 
-export const DESIGN_DOCUMENT_FORMAT = 'modulyte.facade-design';
+export const DESIGN_DOCUMENT_FORMAT = 'facade-designer.facade-design';
 export const DESIGN_DOCUMENT_VERSION = 1;
-export const APP_NAME = 'modulyte-facade-designer';
+export const APP_NAME = 'facade-designer';
 export const APP_VERSION = '0.1.0';
 
 export const finishSchema = z.object({

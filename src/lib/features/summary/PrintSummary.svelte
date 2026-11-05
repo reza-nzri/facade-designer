@@ -32,7 +32,7 @@
 	<article class="summary" data-testid="print-summary">
 		<header>
 			<div>
-				<p class="brand">modulyte · Fassadendesigner</p>
+				<p class="brand">Fassadendesigner</p>
 				<h1>Ihre Fassadengestaltung</h1>
 				<p class="sub">{project.project}</p>
 			</div>
@@ -158,8 +158,8 @@
 				{#each PRICING_ASSUMPTIONS_DE as assumption (assumption)}<li>{assumption}</li>{/each}
 			</ul>
 			<p class="footer">
-				Erstellt mit dem modulyte Fassadendesigner. Die vollständigen Entwurfsdaten (JSON-Export)
-				enthalten jede Modulzuweisung und ermöglichen modulyte die exakte Nachvollziehbarkeit dieser
+				Erstellt mit dem Fassadendesigner. Die vollständigen Entwurfsdaten (JSON-Export) enthalten
+				jede Modulzuweisung und ermöglichen dem Unternehmen die exakte Nachvollziehbarkeit dieser
 				Gestaltung.
 			</p>
 		</section>

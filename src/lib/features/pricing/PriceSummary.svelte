@@ -92,7 +92,7 @@
 				</p>
 				<p>
 					<strong>Nicht enthalten:</strong> Dämmmodule, Unterkonstruktion, Fensterlaibungen, Verschnitt,
-					Montage, Transport und Mehrwertsteuer. Diese Posten kalkuliert modulyte im Angebot.
+					Montage, Transport und Mehrwertsteuer. Diese Posten kalkuliert das Unternehmen im Angebot.
 				</p>
 				<p>Unverbindliche Schätzung – kein Angebot.</p>
 			</div>

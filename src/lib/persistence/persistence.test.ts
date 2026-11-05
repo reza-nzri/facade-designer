@@ -42,7 +42,7 @@ describe('variant repository', () => {
 
 	it('ignores corrupt storage and reports it', async () => {
 		const corrupt: string[] = [];
-		const store = createMemoryStore({ 'modulyte.facade-designer.v1.variants.p-1': '{oops' });
+		const store = createMemoryStore({ 'facade-designer.v1.variants.p-1': '{oops' });
 		const repository = createVariantRepository(store, (key) => corrupt.push(key));
 		expect(await repository.list('p-1')).toEqual([]);
 		expect(corrupt).toHaveLength(1);

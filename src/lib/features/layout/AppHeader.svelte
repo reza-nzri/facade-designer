@@ -57,7 +57,7 @@
 			>
 		</span>
 		<div class="titles">
-			<span class="product">modulyte <b>Fassadendesigner</b></span>
+			<span class="product"><b>Fassadendesigner</b></span>
 			<label class="variant">
 				<span class="visually-hidden">Name des Entwurfs</span>
 				<input bind:value={editor.variantName} maxlength="60" aria-label="Name des Entwurfs" />

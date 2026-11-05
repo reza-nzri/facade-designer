@@ -1,5 +1,5 @@
 /**
- * Source project contract (input data supplied by Modulyte).
+ * Source project contract (input data supplied by the company).
  *
  * The schema mirrors `fassadendesigner_house.json` exactly. Field names stay in snake_case so
  * that the original document round-trips without any renaming. Units are millimetres, the

@@ -4,7 +4,7 @@
   "properties": {
     "format": {
       "type": "string",
-      "const": "modulyte.facade-design"
+      "const": "facade-designer.facade-design"
     },
     "formatVersion": {
       "type": "number",
@@ -283,6 +283,6 @@
     "source",
     "design"
   ],
-  "title": "Modulyte facade design document v1 (export)",
+  "title": "Facade design document v1 (export)",
   "description": "Customer design exported by the Fassadendesigner: unchanged source project, design (wall finishes and module overrides) and a derived pricing summary."
 }

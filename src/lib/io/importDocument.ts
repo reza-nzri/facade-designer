@@ -1,7 +1,7 @@
 /**
  * Imports either
- *  (a) an original source project (`{ project, walls, surfaces }`, as supplied by Modulyte), or
- *  (b) a design document exported by this app (`format: "modulyte.facade-design"`).
+ *  (a) an original source project (`{ project, walls, surfaces }`, as supplied by the company), or
+ *  (b) a design document exported by this app (`format: "facade-designer.facade-design"`).
  *
  * Returns German, customer-facing error messages. Nothing derived in the file is trusted:
  * prices are recomputed and compared with the stored total to flag tampering or outdated rates.
@@ -144,7 +144,7 @@ export function importFromData(data: unknown): ImportResult {
 	return {
 		ok: false,
 		error:
-			'Unbekanntes Dateiformat. Erwartet wird eine Modulyte-Projektdatei oder ein gespeicherter Entwurf.',
+			'Unbekanntes Dateiformat. Erwartet wird eine Projektdatei des Unternehmens oder ein gespeicherter Entwurf.',
 		details: []
 	};
 }

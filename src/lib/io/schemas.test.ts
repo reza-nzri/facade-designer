@@ -13,13 +13,13 @@ import { designDocumentSchema } from './designDocument';
 const SCHEMAS = {
 	'source-project.v1.schema.json': {
 		schema: facadeProjectSchema,
-		title: 'Modulyte source project (input)',
+		title: 'Source project (input)',
 		description:
-			'Facade project supplied by Modulyte: walls with openings and a fixed module layout, plus selectable surfaces. Units: millimetres, origin bottom-left of each wall.'
+			'Facade project supplied by the company: walls with openings and a fixed module layout, plus selectable surfaces. Units: millimetres, origin bottom-left of each wall.'
 	},
 	'facade-design.v1.schema.json': {
 		schema: designDocumentSchema,
-		title: 'Modulyte facade design document v1 (export)',
+		title: 'Facade design document v1 (export)',
 		description:
 			'Customer design exported by the Fassadendesigner: unchanged source project, design (wall finishes and module overrides) and a derived pricing summary.'
 	}

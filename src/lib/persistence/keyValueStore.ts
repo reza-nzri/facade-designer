@@ -24,7 +24,7 @@ export function createMemoryStore(initial: Record<string, string> = {}): KeyValu
  */
 export function createBrowserStore(): { store: KeyValueStore; persistent: boolean } {
 	try {
-		const probe = '__modulyte_probe__';
+		const probe = '__facade_designer_probe__';
 		window.localStorage.setItem(probe, '1');
 		window.localStorage.removeItem(probe);
 		return { store: window.localStorage, persistent: true };

@@ -20,7 +20,7 @@
 <Dialog
 	bind:open
 	title="Kundenzusammenfassung"
-	subtitle="Übersicht zum Ausdrucken oder als PDF – für Sie und für modulyte."
+	subtitle="Übersicht zum Ausdrucken oder als PDF – für Sie und für das Unternehmen."
 	width={900}
 	testId="summary-dialog"
 >

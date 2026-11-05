@@ -168,6 +168,6 @@
     "surfaces"
   ],
   "additionalProperties": {},
-  "title": "Modulyte source project (input)",
-  "description": "Facade project supplied by Modulyte: walls with openings and a fixed module layout, plus selectable surfaces. Units: millimetres, origin bottom-left of each wall."
+  "title": "Source project (input)",
+  "description": "Facade project supplied by the company: walls with openings and a fixed module layout, plus selectable surfaces. Units: millimetres, origin bottom-left of each wall."
 }

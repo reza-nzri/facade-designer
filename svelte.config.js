@@ -7,7 +7,7 @@ const config = {
 	compilerOptions: { runes: true },
 	kit: {
 		adapter: adapter({ fallback: 'index.html' }),
-		paths: { base: process.env.GITHUB_PAGES === 'true' ? '/modulyte-facade-designer' : '' },
+		paths: { base: process.env.GITHUB_PAGES === 'true' ? '/facade-designer' : '' },
 		alias: { $domain: 'src/lib/domain', $features: 'src/lib/features' }
 	}
 };

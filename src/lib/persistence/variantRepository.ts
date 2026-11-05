@@ -9,7 +9,7 @@ import { facadeProjectSchema, type FacadeDesign, type FacadeProject } from '$lib
 import { facadeDesignSchema } from '$lib/io/designDocument';
 import type { KeyValueStore } from './keyValueStore';
 
-const STORAGE_PREFIX = 'modulyte.facade-designer.v1';
+const STORAGE_PREFIX = 'facade-designer.v1';
 
 export const savedVariantSchema = z.object({
 	id: z.string().min(1),

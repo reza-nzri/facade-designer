@@ -1,7 +1,7 @@
 {
-	"name": "modulyte-facade-designer",
+	"name": "facade-designer",
 	"version": "1.0.0",
-	"description": "Interactive facade design configurator for Modulyte modular facade insulation (Test Project 1: Fassadendesigner).",
+	"description": "Interactive facade design configurator for a company's modular facade insulation (Test Project 1: Fassadendesigner).",
 	"private": true,
 	"type": "module",
 	"license": "UNLICENSED",

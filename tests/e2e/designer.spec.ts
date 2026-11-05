@@ -120,7 +120,7 @@ test.describe('Import and export', () => {
 		const path = testInfo.outputPath('export.json');
 		await download.saveAs(path);
 		const document = JSON.parse(readFileSync(path, 'utf8'));
-		expect(document.format).toBe('modulyte.facade-design');
+		expect(document.format).toBe('facade-designer.facade-design');
 		expect(document.formatVersion).toBe(1);
 		expect(document.source.walls).toHaveLength(4);
 		expect(document.design.wallFinishes.south).toEqual({
@@ -154,7 +154,7 @@ test.describe('Import and export', () => {
 		await expectProjectTotal(page, '15.988,50 €');
 	});
 
-	test('imports the original Modulyte project file', async ({ page }) => {
+	test('imports the original source project file', async ({ page }) => {
 		await openFreshApp(page);
 		await page.getByTestId('swatch-rockpanel-white').click();
 		await page
